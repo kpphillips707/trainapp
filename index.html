@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <title>Train App</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Firebase Reference -->
+    <script src="https://test-project-ea4ad.firebaseio.com/"></script>
+
+    <!-- Moment.js Reference -->
+    <!-- <script src="http://momentjs.com/downloads/moment.js"></script>   -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <!-- Train Schedule -->
+    <div class="container">
+
+      <!-- Jumbotron -->
+      <div class="jumbotron" style="background-color: green; color: white">
+        <h1 class="text-center">Live Train Schedule</h1>
+      </div>
+
+      <div class="row">
+
+        <div class="col-lg-12">
+
+        <!-- Train Schedule-->
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title"><strong>Current Departure Times</strong></h3>
+            </div>
+            <div class="panel-body">
+              <table class="table table-hover" id='passenger-table'>
+                <thead>
+                  <tr>
+                    <th>Destination</th>
+                    <th>Departure City</th>
+                    <th>Arrival Time</th>
+                    <th>Departure time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title"><strong>Add Scheduling Info</strong></h3>
+            </div>
+            <div class="panel-body">
+
+              <!-- Entry Form -->
+              <form>
+                <div class="form-group">
+                  <label for="passenger-name-input">Passenger Name</label>
+                  <input class="form-control" id="passenger-name-input" type="text">
+                </div>
+                <div class="form-group">
+                  <label for="role-input">departure city</label>
+                  <input class="form-control" id="role-input" type="text">
+                </div>
+                
+                <button class="btn btn-primary" id="add-passenger-btn"
+                 type="submit">Submit</button>
+              </form>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- JavaScript -->
+	
+    <script>
+
+  var config = {
+    apiKey: "1387256m5j",
+    authDomain: "test-project-ea4ad.firebaseapp.com",
+    databaseURL: "https://test-project-ea4ad.firebaseio.com",
+    projectId: "test-project-ea4ad",
+    storageBucket: "test-project-ea4ad.appspot.com",
+    messagingSenderId: "991070879600"
+  };
+  firebase.initializeApp(config);
+
+var database = firebase.database();
+
+$("#add-passenger-btn").on("click", function(event) {
+  event.preventDefault();
+
+  // Grabs user input
+  var destination = $("#destination-input").val().trim();
+  var departureCity = $("#departure-city-input").val().trim();
+  var arrivalTime = moment($("#arrival-time-input").val().trim(), "DD/MM/YY").format("X");
+  var departureTime = $("#departure-time-input").val().trim();
+
+
+
+//amtrak api
+
+joe@tp:~$ curl -s http://www.amtrakconnect.com/gps_provider_prod.php | jq '.'
+{
+    "err":false,
+    "lat": "43.657510",
+    "lon": "-70.282448",
+}
+
+joe@tp:~$ curl -s http://www.amtrakconnect.com/gps_provider_prod.php | jq '.'
+{
+    "err":false,
+    "lat": "43.677390",
+    "lon": "-70.286580",
+}
+
+</script>
+
+  </body>
+
+</html>
